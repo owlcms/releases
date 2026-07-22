@@ -19,62 +19,65 @@ If records are broken during a meet, they are stored in the database with the se
 
 ## Record Management
 
-The Record Management pages reached from the Records menu entry
+The Record Management pages reached from the Records menu item
 
-![image-20260316104251849](img/2500RecordsManagement/image-20260316104251849.png)
+![image-20260603115701984](img/2500RecordsManagement/image-20260603115701984.png)
 
 ### Loading Records
 
-To reach the page where record definition files are loaded, click on the "Import and Configure Records" left button.
-You can then load record files as you wish. 
+To add records to the database, use the Import button
 
-![image-20260316104621433](img/2500RecordsManagement/image-20260316104621433.png)
+![image-20260603150656099](img/2500RecordsManagement/image-20260603150656099.png)
 
-For our example, we will load records for regional youth games, and the normal regional records.  After loading the two files, we have the following situation:
+This works like the other Upload features in OWLCMS. 
 
-- In our provincial record files, we had several record age groups.  We unchecked the SR records because they are not relevant for this event
-- We can control in what order the records will be shown.  We want our event records shown first, above the provincial records.
+![image-20260603150835603](img/2500RecordsManagement/image-20260603150835603.png)
 
-![image-20260316112013845](img/2500RecordsManagement/image-20260316112013845.png)
+After selection, a summary of the to-be-imported file is shown for confirmation
+
+![image-20260603151850494](img/2500RecordsManagement/image-20260603151850494.png)
+
+And the content is updated
+
+![image-20260603163555701](img/2500RecordsManagement/image-20260603163555701.png)
+
+We then upload a second set of files, for national records, and we can filter what records are shown
+
+![image-20260603163759906](img/2500RecordsManagement/image-20260603163759906.png)
+
+### Editing Individual Records
+
+Clicking on a record opens an editing form
+
+![image-20260603163945194](img/2500RecordsManagement/image-20260603163945194.png)
 
 ## Display Options
 
-There are additional display options in the top section
+The Display Options button controls the order in which records will be shown on the scoreboards. In addition, 
 
-Normally, the scoreboard will only show the records for which the current athlete is eligible (for the age groups and federations in which he is eligible)
+- Normally, only the records from the athlete's category and those he is eligible to beat are shown
+- You can choose to show all categories in the session, and all federations in the session
 
-- You may want show all the federations (the South American records and PanAm records would be shown for Canadian athletes even though they are not eligible to beat the South American record -- see [Controlling Eligibility](#controlling-eligibility) below
+![image-20260603164959645](img/2500RecordsManagement/image-20260603164959645.png)
 
-- You can select to show all the records for all the athletes in the session during the whole session instead
+## Exporting New Records
 
-## Viewing Records
+At the end of the competition, you can export records by using the "This Competition" filter. The filtering is based on the competition name.
+Note that new records are also marked as provisional, so you can also use that status.
 
-Using the other button ("Edit and Export Records")  we can see the records we have loaded
+![image-20260618092520914](img/2500RecordsManagement/image-20260618092520914.png)
 
-![image-20260316120438213](img/2500RecordsManagement/image-20260316120438213.png)
 
-## Updating Records Interactively
+Use a "dataExchange" template will produce an Excel File that you can then load into OWLCMS or in a [Record Repository](RecordsRepository)
+![image-20260603165707050](img/2500RecordsManagement/image-20260603165707050.png)
 
-The first option to update records is to edit them directly in the database, and re-export the records after doing the edits.
-To do so, click on the record.
+The resulting file is in the exact same format as the record inputs, so you can merge it in Excel format if you prefer.
 
-![image-20260316121328976](img/2500RecordsManagement/image-20260316121328976.png)
+> It is the presence of information in the Group column that indicates that the record is provisional.  To approve the records, you either clear the cells before loading, or you use the "Accept Proviional Records" button in the application after loading.
 
-NOTE:  if you enter something in the Competition Group at the bottom, this normally indicates the session in which the record was broken, and is understood to mean that the record is provisional.
+![image-20260603165937078](img/2500RecordsManagement/image-20260603165937078.png)
 
-## Exporting New Records and Updating Using Files
-
-At the end of the competition, all new records are marked as provisional.  You can see the new records by using the Status dropdown in the filter bar and selecting "Provisional".  For example
-![image-20260316141613882](img/2500RecordsManagement/image-20260316141613882.png)
-
-Using the Export Records at the top and choosing a "dataExchange" template will produce an Excel File that you can then load into OWLCMS or in a [Record Repository](RecordRepository)
-![image-20260316141805170](img/2500RecordsManagement/image-20260316141805170.png)
-
-The resulting file is in the exact same format as the record inputs, so you can merge it in Excel format if you prefer. As mentioned earlier, it is the presence of information in the Group column that indicates that the record is provisional.  To approve the records, you either clear the cells before loading, or you use the "Accept Proviional Records" button in the application after loading.
-
-![image-20260316142118946](img/2500RecordsManagement/image-20260316142118946.png)
-
-## Producing Records for Publishing
+## Publishing Records
 
 When Exporting, you can select templates. For inclusion on a Web site, you can use the "display" templates.  This will give you an output where the column heading are translated in your langage.
 
@@ -87,10 +90,10 @@ For example, exporting Masters records in the sheets format yields an Excel of t
 
 ## Recomputing Records
 
-Say for example you loaded an obsolete version of a record file, or forgot to load one, and you realize after the competition has started.  No problem. You can recompute all records that were improved by using the "Recompute Recordsbutton in the top bar.
+Mistakes happen. Say you loaded an obsolete version of a record file, or forgot to load a record file, and you realize after the competition has started.  No problem. You can recompute all records that were improved by using the "Recompute Recordsbutton in the top bar.
 This will essentially replay all the lifts in the competition order, so the improved records are recomputed in the correct order.
 
-## Controlling Eligibility
+## Record Eligibility
 
 For each record definition there is a Federation field.  In the screenshot below the federations are UMWF and CMWF.   Some athletes are eligible to UMWF but not CMWF.  The information about record eligibility is part of the athlete registration form (found under Edit Athlete Entries during the preparation).
 
@@ -129,7 +132,7 @@ The following fields are expected in the file, in that specific order.  The firs
 | ---------- | ------------------------------------------------------------ |
 | Federation | The acronym of the federation with authority to certify the record.  In competitions that involve athletes from multiple federations, this can be used to check whether an athlete belongs to the correct federation to break a record (see [Eligibility Criteria](#eligibility-criteria) below).<br />Using the official federation acronym is recommended (e.g. IWF) |
 | RecordName | The name of the record, used for naming the rows in the display.  The values in this column *can be translated to the local language.*<br />For an IWF record, the name will likely be "World".<br />**Note:**  Because the name of the files controls the ordering of the rows, records that bear the same name should all be in the same file.  If you have "National" Masters records and "National" SR records, and you want them to be on the same row, then combine the two in the same file.  Otherwise there will be several rows with the same name. |
-| AgeGroup   | The age group to which the record applies.  The codes should match those that have been specified when loading the Age Groups (see the [Age Groups and Categories](Categories) page).  In competitions that involve multiple age groups, this can be used to determine which records can be broken by an athlete (see [Eligibility Criteria](#eligibility-criteria) below).<br />Note that there can also be records whose age group does not match a competition age group -- for example, a record that can be broken by anyone.  If the name does not match an age group active in the competition, the eligibility checks will be skipped. |
+| AgeGroup   | The age group to which the record applies.  The codes should match those that have been specified when loading the Age Groups (see the [Age Groups and Categories](2210DefineAgeGroupsAndCategories.md) page).  In competitions that involve multiple age groups, this can be used to determine which records can be broken by an athlete (see [Eligibility Criteria](#eligibility-criteria) below).<br />Note that there can also be records whose age group does not match a competition age group -- for example, a record that can be broken by anyone.  If the name does not match an age group active in the competition, the eligibility checks will be skipped. |
 | Gender     | M or F depending on the gender of the athlete.               |
 | ageLow     | Lowest inclusive age for breaking the record.  For IWF JR, you would use 15. |
 | ageCat     | Highest inclusive age for breaking the record. For IWF JR you would use 20. Use 999 when there is no upper limit. |

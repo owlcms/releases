@@ -1,28 +1,22 @@
-### Installation
+## macOS Installation
 
-- Download the `.dmg` installer from the [release repository](https://github.com/owlcms/owlcms-controlpanel/releases) by clicking on this link [macOS Installer](https://github.com/owlcms/owlcms-controlpanel/releases/latest/download/macOS_Control_Panel_Installer.dmg)
+This is a typical macOS installation process.  If you prefer command-line installs using `brew`, see [this page](LocalMacBrewSetup).
 
-  - See this link for the [release notes](https://github.com/owlcms/owlcms-controlpanel/releases/latest)
+- Download the `.dmg` installer from the [release repository](https://github.com/owlcms/owlcms-controlpanel/releases) 
+  - For current AppleSilicon Macs (M1/M2/M3...) use this link:  [macOS Installer](https://github.com/owlcms/owlcms-controlpanel/releases/latest/download/macOS_OWLMCS.dmg)
+  - For older Intel Macs: use this link: [macOS **Intel** Installer](https://github.com/owlcms/owlcms-controlpanel/releases/latest/download/macOS_Intel_OWLMCS.dmg)
+- Open the `.dmg` file.   You should see something like this
+  ![image-20260721110844283](img/LocalMacSetupLegacy/image-20260721110844283.png)
+- Drag the owlcms icon over the Application icon.  This will copy the OWLCMS Control Panel to your Applications folder.
 
-- Open the `.dmg` file. 
+### Starting OWLCMS
 
-- There are two options for you (you can do both if you want to)
+- Open the Applications folder using the ![image-20260603094422742](img/LocalMacSetup/image-20260603094422742.png) Dock icon at the bottom of your screen. 
+- Type "owlcms"  and click on the icon.
+  ![image-20260721111535423](img/LocalMacSetupLegacy/image-20260721111535423.png)
 
-  - Drag the owlcms icon to the Application icon.  This will copy the control panel app in your Application folder and you will find it there along with your other applications
-  - Drag the owlcms icon to your desktop directly.
+- The control panel will now open. On first use, the control panel will offer to complete the installation by retrieving the current version of the scoring system. 
+  ![image-20260721112105865](img/LocalMacSetupLegacy/image-20260721112105865.png)
 
-  ![30](../../../../../Dev/git/owlcms_v23stable/owlcms_v23master/docs/nimg/1120Mac/30.jpg)
-
-
-### Running OWLCMS
-
-- **For macOS 14 and earlier**:
-  - After dragging the app to its location, **Right-click** on it. A warning about running an unsigned application will come up. **Select Open** to authorize the application to run.  This is only needed the first time around.
-
-- **For macOS 15**:
-  - Try to run the program.  This will be denied.  The right-click shortcut no longer works.
-
-  - Go to the  `System Settings` > `Privacy` menu.  Scroll to the bottom.  You should see an option to allow owlcms to run.  See this [illustrated guide](https://wiki.hacks.guide/wiki/Open_unsigned_applications_on_macOS_Sequoia) for the process -- you will of course use `owlcms` as the application name.
-
-- Once this is done, you can follow the steps shown in the [Local Control Panel Overview](LocalControlPanel)
-
+- After the `Install` OWLCMS will be ready for use using the `Launch` button.  See the [Control Panel](LocalControlPanel) page for more information.
+  ![image-20260721112203693](img/LocalMacSetupLegacy/image-20260721112203693.png)

@@ -1,5 +1,3 @@
 Move log - generated
-Starting move operation
-MD list not found: C:\Users\lamyj\git\owlcms4\docs\scripts\archive\reports\md_to_archive.txt
-Image list not found: C:\Users\lamyj\git\owlcms4\docs\scripts\archive\reports\images_to_archive.txt
+Starting docs obsolete move (move)
 Move operation completed
