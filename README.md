@@ -2,7 +2,7 @@
 
 # Release Bundles and Documentation
 
-This location contains the release notes and the software modules that the installers use.
+This location contains the release notes and the software snapshots that the Control Panel downloads when installing.
 
 > ⚠️⚠️⚠️
 > To install and run OWLCMS, you need to use the [**OWLCMS Control Panel**](https://github.com/owlcms/owlcms-controlpanel/releases).
