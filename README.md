@@ -2,7 +2,7 @@
 
 # Documentation and Installer Support Files
 
-This location contains user documentation and the software bundles used by the Control Panel installer.
+This repository contains user documentation and the stable software bundles used by the Control Panel installer.
 
 > ⚠️⚠️⚠️
 > To install and run OWLCMS, you need to use the [**OWLCMS Control Panel**](https://github.com/owlcms/owlcms-controlpanel/releases).
