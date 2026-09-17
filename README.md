@@ -1,8 +1,8 @@
 # OWLCMS - Olympic Weightlifting Competition Management System
 
-# Release Bundles and Documentation
+# Documentation and Installer Support Files
 
-This location contains the release notes and the software snapshots that the Control Panel downloads when installing.
+This location contains user documentation and the software bundles used by the Control Panel installer.
 
 > ⚠️⚠️⚠️
 > To install and run OWLCMS, you need to use the [**OWLCMS Control Panel**](https://github.com/owlcms/owlcms-controlpanel/releases).
