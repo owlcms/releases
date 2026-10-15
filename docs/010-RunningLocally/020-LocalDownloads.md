@@ -8,5 +8,5 @@ The installation details vary slightly by platform.  See the links just below. A
 
 ### Release Notes
 
-Release Notes: [Release Notes](https://github.com/owlcms/owlcms4/releases/tag/68.0.0)
+Release Notes: [Release Notes](https://github.com/owlcms/owlcms4/releases/tag/68.0.1)
 
