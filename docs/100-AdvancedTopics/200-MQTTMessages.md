@@ -32,18 +32,20 @@
 
 #### Subscribed by jury and referee devices
 
-- `owlcms/fop/resetDecisions/A :option`: The clock has started for a new attempt. All LEDs for referee and jury member decisions are turned off. 
+- `owlcms/fop/resetDecisions/A :option`: All LEDs for referee and jury member decisions are turned off. 
     - `option` is currently `reset` but is ignored.
-    - This is not the timekeeper clock start.  It is the clock start only when a new attempt clock is starting, or athlete clock continues after changes. This event does not occur if the athlete lifts the bar and puts it down.
+    - Published when the clock starts for a new attempt (not the timekeeper clock start: only when a new attempt clock is starting, or the athlete clock continues after changes; not when the athlete lifts the bar and puts it down).
+    - Also published when a review vote is called (Call for Votes; on a jury box, Summon All during a seven-person Adjudication Panel jury break, or during a review with the `automaticBreakNoVPT` option), when the Jury Chair enters a decision that is not the result of a complete vote (no vote, an incomplete vote, or against the vote), and when a vote result is cancelled. Resume does not reset the displays; the next clock start does. When the review vote is that of the jury alone (3- or 5-member jury, 4-member jury without video playback), the referees do not vote again: their decisions are published again right after `resetDecisions`, so the jury box keeps the referee lights.
 - `owlcms/fop/decision/A :ref :decision`: 
    A referee has made a decision.  The jury devices shows the decision if it has the red/white LEDs.
    - `ref` is 1 2 or 3
-    - `decision` is `good` or `bad`
+    - `decision` is `good`, `bad` or `hidden`
+    - `hidden` is sent during the review vote of the seven-person Adjudication Panel: the referee has voted and the device shows a green LED; the actual `good` or `bad` is sent for each referee when the last of the seven votes is in.  Devices that do not know `hidden` must ignore it (Blue Owl devices need an updated firmware).
 
 #### Subscribed by jury devices
 
 - `owlcms/fop/juryMemberDecision/A :juryMember :decision`: 
-   A jury member has made a decision.  Decisions are not shown until all jury members have voted The jury devices shows `hidden` as a green LED, and good/bad as white/red.  This message is emitted as hidden when the jury member votes, and on the last vote the message is emitted again with the actual decision. The last jury member to vote is not given `hidden`.
+   A jury member has made a decision.  Decisions are not shown until all jury members have voted The jury devices shows `hidden` as a green LED, and good/bad as white/red.  This message is emitted as `hidden` each time a jury member votes, including during the review vote of the seven-person Adjudication Panel.  When all jury members have voted, the message is emitted again for every member with the actual decision (during a review vote, when the result of the vote is known).
    A jury device may perform this processing autonomously and ignore these messages.
    - `juryMember ` is 1 2 3 4 or 5
     - `decision` is `hidden` `good` or `bad`
@@ -53,6 +55,9 @@
   
 - `owlcms/fop/challenge/A`: 
   A challenge has been issued (the application is in BreakType.CHALLENGE mode.)  There is no argument. The device should clear the jury member decision lights in order to allow a secret vote to be taken on a video replay.
+
+- These two messages are **not** published when the votes on the lift are kept displayed for the review: every jury break of the seven-person Adjudication Panel (jury size 4 with video playback: automatic review, Challenge or Deliberation), and every review with `automaticBreakNoVPT` enabled (3 members, 4 without VPT, or 5 with or without VPT). In these cases the lights are cleared by `resetDecisions` when the Jury Chair calls the vote (on a jury box, with Summon All).
+- They are not published either when a Deliberation becomes a Challenge or the reverse: only the label changes, and the lights stay as they are.
   
 
 #### Subscribed by the referee device:
@@ -156,6 +161,7 @@ Only owlcms listens; devices do not listen to one another.
 
 - `owlcms/clock/A :action`: The timekeeper has started, stopped, or reset the clock. `toggle` allows using the same button to start/stop the clock.
   - `action` is `start`, `stop`, `toggle`, `60`, or `120`
+  - While the jury has not finished voting on the previous lift, a start is refused and the clock stays stopped (no `owlcms/fop/start` is published). A start sent again at least one second after the refusal, while the votes are still missing, starts the clock without them, as **Start clock anyway** does on a console; a quicker second start is refused.
 
 ### Messages published by the jury device
 
@@ -163,13 +169,17 @@ Only owlcms listens; devices do not listen to one another.
 
 - `owlcms/jurybox/summon/A :official`: The jury has summoned an official.
     - `official` is `1`, `2`, `3`, `all` or `controller`
+    - During a seven-person Adjudication Panel jury break, `all` is **Call for Votes**: owlcms publishes `resetDecisions`, then `summon` for the three referees, and the seven officials vote again.  During a review with the `automaticBreakNoVPT` option, `all` is also **Call for Votes**, but only the jury votes again: owlcms publishes `resetDecisions`, then the referees' decisions again, and no `summon`.  The individual messages `1`, `2` and `3` summon one referee.  In every other case `all` summons the three referees.
+    - Outside a break, `all`, `1`, `2` and `3` first start a jury deliberation.
 - `owlcms/jurybox/juryMember/decision/A :member :decision`: Jury member decides the attempt is a good lift or no lift.
     - `member` is `1`, `2`, `3`, `4`, or `5`
     - `decision` is `good` or `bad`
-- `owlcms/jurybox/decision/A :decision`: The jury has made a decision.
+- `owlcms/jurybox/decision/A :decision`: The Jury Chair gives the decision (same as the Good Lift / No Lift buttons of Jury Control).
     - `decision` is `good` or `bad`
+    - The decision is applied at once, without confirmation and without a technical rule (the box has no screen).  The announcer's dialog asks the announcer to get the reason from the Technical Controller.
 - `owlcms/jurybox/break/A :breakEvent`: The jury has called for a break.
    - `breakEvent` is `technical` `deliberation` (start a jury-initiated break), `challenge` (start a challenge-initiated break) or `stop` (resume competition).
+   - `deliberation` and `challenge` follow the rules of the [Jury](../060-Refereeing/020-Jury#deliberation-challenge-and-summon-rules) page: outside a jury break they start one; during a Deliberation or Challenge started by the Chair, the other one changes only the label; during an automatic review, or for the review already under way, they do nothing.  An invalid `challenge` (the referees gave a Good Lift, or the jury has already decided the lift) is ignored.
 
 ## External controller logic:
 

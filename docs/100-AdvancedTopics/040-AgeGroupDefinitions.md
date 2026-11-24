@@ -16,7 +16,7 @@ In the following example, there would be a single "best athlete" amongst all You
 
 ### Championships Tab
 
-The `Championships` tab describes the championship-specific settings used by the age groups. Each row defines one championship. Boolean columns use `true` or `false`. Set `useCompetitionDefaults` to `true` to inherit the competition-wide defaults; otherwise, fill in the settings that are specific to this championship.
+The `Championships` tab describes the championship-specific settings used by the age groups. Each row defines one championship. Boolean columns use `true` or `false`. Set `useCompetitionDefaults` to `true` to inherit the championship template; otherwise, fill in the settings that are specific to this championship. The column retains its historical name: the shared defaults are now edited with **Define Championship Template**, not directly in the Competition Rules tabs.
 
 The recommended way to learn the layout is to configure the championships using the interactive `Define Championships` form, export the age groups, and use the exported `Championships` tab as the starting point for your file.
 
@@ -34,9 +34,9 @@ The spreadsheet uses the same defaults and precedence rules as the interactive `
 
 For older workbooks and JSON V1/V2 exports without `medalPolicy`, `snatchCJTotalMedals=true` means `ALL_THREE`; false or missing means `TOTAL_ONLY`. An explicit `medalPolicy` takes precedence over that legacy boolean. When `teamPointsPolicy` is absent, it defaults to the medal policy, regardless of the old global team-points toggle. Score-based team rankings are unchanged. IMWA Masters team points remain total-only.
 
-- If an age group names a championship that has no matching row in the `Championships` tab, it uses the default championship, which reads the competition-wide settings.
-- The competition-wide defaults are the settings from the competition rules and team rules: medals for snatch, clean and jerk, and total; the competition scoring system; team points for first, second, and third place; men's, women's, and mixed team counting limits; maximum team size; and maximum athletes per category. Best athlete, best snatch, and best clean and jerk scoring also default to the competition scoring system.
-- If a championship row has `useCompetitionDefaults` set to `true`, those competition-wide defaults take precedence for `scoringSystem`, `bestAthleteScoringSystem`, `bestSnatchScoringSystem`, `bestCJScoringSystem`, `snatchCJTotalMedals`, `teamPoints1st`, `teamPoints2nd`, `teamPoints3rd`, `mensBestN`, `womensBestN`, `mixedBestN`, `maxTeamSize`, and `maxPerCategory`. The row still supplies the championship `name` and `type`.
+- If an age group names a championship that has no matching row in the `Championships` tab, it uses the default championship, which reads the championship template.
+- The shared defaults are stored in the championship template: medal and scoring policies; best-athlete, best-snatch and best-clean-and-jerk scoring; team points; men's, women's and mixed team counting limits; maximum team size; and maximum athletes per category. Edit them with **Define Championship Template** above the championship list.
+- If a championship row has `useCompetitionDefaults` set to `true`, those template defaults take precedence for `scoringSystem`, `bestAthleteScoringSystem`, `bestSnatchScoringSystem`, `bestCJScoringSystem`, `snatchCJTotalMedals`, `teamPoints1st`, `teamPoints2nd`, `teamPoints3rd`, `mensBestN`, `womensBestN`, `mixedBestN`, `maxTeamSize`, and `maxPerCategory`. The row still supplies the championship `name` and `type`.
 - If `useCompetitionDefaults` is `false`, the championship row values take precedence for those fields. `POINTS` in `teamScoringSystem` or `mixedTeamScoringSystem` means sum of points; a scoring-system code means sum of scores using that system; a blank cell disables that team ranking. If `snatchCJTotalMedals` is `true`, the medal `scoringSystem` is ignored, because medals are awarded separately for snatch, clean and jerk, and total.
 - Mixed team selection follows the same precedence as the dialog: `explicitMixedTeamMembers=true` uses explicit mixed team members and `explicitTeamSize`; otherwise a positive `mixedBestN` counts the top N mixed results; otherwise `mixedMensBestN` and `mixedWomensBestN` count men's and women's results separately. The default combined men's and women's teams mode uses 999 for each gender; older files with both values blank are interpreted the same way.
 - In prior JSON V1/V2 databases, the competition-level `mixedTeamSize` field is the roster size for an explicitly selected mixed-membership team. During migration it becomes `explicitTeamSize`; it does not select the "# Best Mixed" scoring mode.
@@ -59,7 +59,7 @@ The radio button choices in the interactive dialog are represented by the presen
 | --- | --- |
 | `name` | Championship name. This must match the `championship` value used by rows in the `AgeGroups` tab. |
 | `type` | Championship type or age division used for this championship. |
-| `useCompetitionDefaults` | If `true`, the championship inherits the competition-wide defaults. |
+| `useCompetitionDefaults` | If `true`, the championship inherits the championship template. |
 | `scoringSystem` | Scoring system used for medals and ranking in the championship. |
 | `bestAthleteScoringSystem` | Scoring system used for best athlete awards. |
 | `bestSnatchScoringSystem` | Scoring system used for best snatch awards. |
@@ -73,10 +73,12 @@ The radio button choices in the interactive dialog are represented by the presen
 | `mensBestN` | Number of men's results counted for team scoring. |
 | `womensBestN` | Number of women's results counted for team scoring. |
 | `teamScoringSystem` | Scoring method used for team results. |
+| `teamScoresWithoutTotal` | Sum-of-scores men's and women's teams only. If `true`, an athlete who lifted without making a total contributes the score computed from their best snatch and best clean and jerk. If `false` or absent (the default), that athlete contributes 0. |
 | `maxTeamSize` | Maximum number of athletes on a team. |
 | `maxPerCategory` | Maximum number of team athletes counted per bodyweight category. |
 | `mixedTeamEnabled` | If `true`, mixed team scoring is enabled for this championship. |
 | `mixedTeamScoringSystem` | Scoring method used for mixed team results. |
+| `mixedTeamScoresWithoutTotal` | Same as `teamScoresWithoutTotal`, for sum-of-scores mixed teams. |
 | `explicitMixedTeamMembers` | If `true`, mixed team members are selected explicitly. |
 | `explicitTeamSize` | Number of athletes required when team membership is explicit. |
 | `mixedBestN` | Number of overall mixed team results counted. If empty or 0, the overall mixed-results mode is not selected; use `mixedMensBestN` and `mixedWomensBestN` instead. |
@@ -103,6 +105,6 @@ So in this example
 
 ## Loading the Age Group  Definition File
 
-The drop-down at the top of the page shows the available files.  After loading the file, the athletes will automatically be reassigned.
+The drop-down at the top of the page shows the available files.  After loading the file, all eligibilities are recomputed: every athlete is assigned to every category they now qualify for (age, gender, body weight and qualifying total), in all active age groups, and athletes who no longer qualify are removed.
 
 ![image-20260718103332522](img/040-AgeGroupDefinitions/image-20260718103332522.png)

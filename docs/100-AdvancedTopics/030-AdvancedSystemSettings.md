@@ -26,7 +26,7 @@ This section is used if you wish to add protection to the OWLCMS server.  It is 
 
 ### Access Control
 
-This section controls who can access the system.
+This section controls who can access the system. It is on the Administration page, in the Security and Audit tab.
 
 ![10](img/030-AdvancedSystemSettings/10.png)
 
@@ -35,9 +35,8 @@ The settings are as follows.  In actual practice only the first (Password for Of
 - **Password for Officials**  When doing streaming, it is possible that you want to prevent the people running the video from accessing the technical official's consoles. A password will be required for the various technical official screens
 - **Authorized IP addresses for Officials** For the same reason, you may want to instead (or in addition to password) use whitelisting.  Technical officials will be required to come from this network.  If running in the cloud but from a gym, this would be the public IP address shown by https://ip4.me/.
 - **IP Addresses Authorized to Access Displays** and **Password for Displays**.  You may want to authorize a video production company to see your displays, likely without setting a password.  The screen password setting is there for symmetry and is unlikely to be used.
-- **Backdoor Access IP**  This grants access without requesting a password, to all the technical official screens and displays.  Setting this value also enables access to two other pages that are normaly hidden
-  - the `/simulstion`page to [launch a simulated competition](./160-Simulation).  
-  - The`/admin` page that is used for stopping the system and special data migration functions
+- **Remember this browser**  The login page offers to remember the browser after a correct password until midnight (in the competition time zone when one is set), or until the password changes or the user logs out, so that dedicated laptops and display screens need not enter it again. The remembered browsers are stored in the current database; they survive an OWLCMS restart but are not kept by an export and import. "Forget all remembered browsers" on the Administration page requires every browser to enter its PIN or password again.
+- **Allow staying logged in for the day** (on by default)  This setting makes the login page offer "Remember this browser" in Simple Access mode and "Keep me logged in for today" in User Accounts mode. The browser stays logged in until midnight (in the competition time zone when one is set), including after a restart of OWLCMS. Accounts with the administrator role always enter their password. Logging out, changing the PIN/password or disabling the account ends it; turning this setting off prevents remembered logins in both access modes. The IWF compliance check reports the setting as a requirement not met while it is on.
 
 
 ### Features
