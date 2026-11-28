@@ -17,6 +17,7 @@
   * [Language and System Settings](/030-PreCompetitionSetup/030-LanguageAndSystemSettings)
   * [Age Groups and Categories](/030-PreCompetitionSetup/040-DefineAgeGroupsAndCategories)
   * [Championships and Awards](/030-PreCompetitionSetup/050-Championships)
+  * [Scoring Systems](/030-PreCompetitionSetup/055-ScoringSystems)
 * Competition Setup
   * [Registration](/040-CompetitionSetup/010-Registration)
   * [Sessions and Fields of Play](/040-CompetitionSetup/020-SessionsAndFieldsOfPlay)

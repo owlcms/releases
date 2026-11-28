@@ -3,7 +3,7 @@ In OWLCMS a Competition can have multiple Championships being held at the same t
 - Is linked to a set of age groups.  Normally a men age group and a women age group.  Sometimes several -- Masters age groups are the typical exception.
 - Determines if there are medals for total only or for each of the lifts
 - Determines if medals are awarded on the weight lifted or on some other score (for example, the 3 best Sinclair scores)
-- Determines the scores used for best athlete awards
+- Determines the scores used for best athlete awards (see [Scoring Systems](055-ScoringSystems.md))
 - Determines if team awards are given and how they are computed.
 
 To edit championships, use **Define Championships** on the Prepare Competition page, or open the **Championships, Medals and Teams** tab in Competition Information and Rules. That tab contains the championship list and editor, not the former competition-wide defaults form. Medal, best-athlete and team rules are configured for each championship.
